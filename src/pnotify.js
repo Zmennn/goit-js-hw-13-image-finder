@@ -15,11 +15,11 @@ const notificationSettings = new Stack({
     positioned: true,
 
 })
-export function onErrorNotification() {
+export function onErrorNotification(text) {
     error({
         title: "Ошибка",
         delay: 4000,
-        text: "Что-то пошло не так",
+        text: text,
         stack: notificationSettings
     })
 }

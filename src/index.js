@@ -28,20 +28,26 @@ function onSubmit(event) {
     request.creatingRequest()
         .then(res => {
             if (!res.ok) {
-                Promise.reject(res)
+                throw "Данные не полученны"
             }
             return res
         })
         .then(res => res.json())
+        .then(res => {
+            if (res.total === 0) {
+                throw "Неадекватный ввод, исправьте"
+            }
+            return res
+        })
         .then(res => createMarkup(res))
-        .catch(err => onErrorNotification())
-}
+        .catch(err => onErrorNotification(err))
+};
 
 function createMarkup(data) {
 
     const markup = cardTemplate(data.hits);
     galleryEl.insertAdjacentHTML('beforeend', markup)
-}
+};
 
 
 
