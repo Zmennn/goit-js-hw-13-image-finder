@@ -3,7 +3,7 @@ import galleryTemplate from "./templates/gallery.hbs";
 import cardTemplate from "./templates/card.hbs";
 import FetchImg from "./fetchCreate";
 import options from "./apiService"
-import { error } from "@pnotify/core";
+import { notificationSettings, onErrorNotification } from './pnotify'
 
 
 const bodyEl = document.querySelector('body');
@@ -34,7 +34,7 @@ function onSubmit(event) {
         })
         .then(res => res.json())
         .then(res => createMarkup(res))
-        .catch(err => console.log("err", err))
+        .catch(err => onErrorNotification())
 }
 
 function createMarkup(data) {

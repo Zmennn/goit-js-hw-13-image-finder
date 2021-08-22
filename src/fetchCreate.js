@@ -13,7 +13,7 @@ export default class FetchImg {
 
         this.pg += 1;
 
-        const url = new URL('https://pixabay.com/api/');
+        const url = new URL('https://p1ixabay.com/api/');
         const optionsArr = Object.entries(this.options);
         optionsArr.forEach(el => url.searchParams.set(el[0], el[1]));
         url.searchParams.set("page", this.pg);
