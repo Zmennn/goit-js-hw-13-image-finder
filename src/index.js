@@ -43,11 +43,22 @@ function onSubmit(event) {
         .catch(err => onErrorNotification(err))
 };
 
+const onEntry = (entries, observer) => {
+    entries.forEach(entry => {
+        console.log(entry);
+        // тут можно писать логику для проверки вхождения
+    });
+};
+
+
 function createMarkup(data) {
 
     const markup = cardTemplate(data.hits);
-    galleryEl.insertAdjacentHTML('beforeend', markup)
+    galleryEl.insertAdjacentHTML('beforeend', markup);
+    const observer = new IntersectionObserver(onEntry, { threshold: 0.6 });
+    observer.observe(galleryEl.lastElementChild)
 };
+
 
 
 
