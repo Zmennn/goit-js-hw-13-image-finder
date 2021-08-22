@@ -1,0 +1,10 @@
+.gallery {
+  min-width: 1200px;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.gallery img {
+  display: block;
+  object-fit: cover;
+}
