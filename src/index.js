@@ -47,6 +47,7 @@ const onEntry = (entries, observer) => {
     entries.forEach(entry => {
         console.log(entry);
         // тут можно писать логику для проверки вхождения
+        if (entry.isIntersecting) { request.creatingRequest().bind(onSubmit) }
     });
 };
 
@@ -55,8 +56,12 @@ function createMarkup(data) {
 
     const markup = cardTemplate(data.hits);
     galleryEl.insertAdjacentHTML('beforeend', markup);
-    const observer = new IntersectionObserver(onEntry, { threshold: 0.6 });
-    observer.observe(galleryEl.lastElementChild)
+    const observer = new IntersectionObserver(onEntry, { threshold: 0.9 });
+
+
+
+    setTimeout(() => observer.observe(galleryEl.lastElementChild), 250)
+
 };
 
 
