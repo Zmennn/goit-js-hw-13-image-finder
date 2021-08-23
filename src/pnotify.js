@@ -3,8 +3,6 @@ import "@pnotify/core/dist/PNotify.css";
 import "@pnotify/core/dist/BrightTheme.css";
 
 
-
-
 const notificationSettings = new Stack({
     dir1: 'up',
     dir2: 'left',
@@ -13,12 +11,12 @@ const notificationSettings = new Stack({
     maxOpen: 1,
     modal: 'false',
     positioned: true,
-
 })
+
 export function onErrorNotification(text) {
     error({
-        title: "Ошибка",
-        delay: 4000,
+        title: "",
+        delay: 5000,
         text: text,
         stack: notificationSettings
     })
