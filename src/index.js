@@ -5,7 +5,8 @@ import FetchImg from "./fetchCreate";
 import { fetchById } from "./fetchCreate";
 import options from "./apiService";
 import { onErrorNotification } from './pnotify';
-import * as basicLightbox from 'basiclightbox';
+import * as basicLightbox from 'basiclightbox'
+import "basiclightbox/dist/basicLightbox.min.css";
 
 let observer = {};
 let request = {};
@@ -63,11 +64,11 @@ export function processingRequest(promise) {
 
 
 function onEntry(entries) {
-    entries.forEach((item) => {
-        if (item.isIntersecting) {
-            request.creatingRequest()
-        }
-    })
+    
+    if (!entries[0].isIntersecting) { return }
+    observer.disconnect()
+    
+    request.creatingRequest()
 }
 
 
@@ -77,7 +78,15 @@ function createMarkup(data) {
     galleryEl.insertAdjacentHTML('beforeend', markup);
 
     observer = new IntersectionObserver(onEntry, { threshold: 0.7 });
-    setTimeout(() => observer.observe(galleryEl.lastElementChild), 250);
+
+
+    // Такое странное решение я сам себе придумал,в чем собственно проблема-
+    //IntersectionObserver дает сразу же 2 срабатывания о входе и выходе наблюдаемого
+    //элемента, тут это немного проблема-сразу же рисуется 24 страницы вместо 12,
+    //подозреваю что он срабатывает на отрисовку  страницы, попробовал его
+    //"задержать" и вполне себе помогло, не уверен что это хорошее решение, но лучшего я не нашел( .
+    setTimeout(() => observer.observe(galleryEl.lastElementChild), 350);
+
 
     galleryEl.addEventListener('click', onGalleryClick)
 };
@@ -86,21 +95,21 @@ function createMarkup(data) {
 
 
 function onGalleryClick(event) {
-    console.log(event.target.hasAttribute('data'));
+
+    if (!event.target.hasAttribute('data-id')) { return };
+
     const id = (event.target.dataset.id);
     fetchById(id, options)
         .then(res => res.json())
-        // .then(res => console.log(res.hits[0].largeImageURL))
         .then(res => {
-            basicLightbox.create(`
-		<img width="1400" height="900" src=${res.hits[0].largeImageURL}>
-	`, { className: 'modal-position' }).show()
+            basicLightbox.create(`<img src=${res.hits[0].largeImageURL}>`,
+                {
+                    onShow: () => bodyEl.classList.add('onOpen'),
+                    onClose: () => bodyEl.classList.remove('onOpen')
+                }).show()
         })
-        .catch(res => console.log(res))
-
-}
-
+        .catch(res => onErrorNotification("Картинка не полученна"))
+};
 
 
 
-// instance.show()
