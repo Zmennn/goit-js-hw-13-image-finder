@@ -1,0 +1,2 @@
+.search-form input{font-size:3vh}.search-form{margin-top:30px;text-align:center}.gallery{display:grid;grid-gap:20px;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));grid-gap:30px}.photo-card{align-self:end;border:1px solid #000}.gallery img{display:block;width:100%}.stats{display:flex;width:100%}.stats-item{width:25%;text-align:center}.onOpen{overflow:hidden}
+/*# sourceMappingURL=/goit-js-hw-13-image-finder/style.3777a59c.css.map */
