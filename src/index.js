@@ -32,6 +32,7 @@ function onSubmit(event) {
     galleryEl.innerHTML = '';
 
     const searchRequest = formEl.elements.query.value;
+    formEl.elements.query.value = "";
     request = new FetchImg(searchRequest, options);
 
     request.creatingRequest()
@@ -64,10 +65,10 @@ export function processingRequest(promise) {
 
 
 function onEntry(entries) {
-    
+
     if (!entries[0].isIntersecting) { return }
     observer.disconnect()
-    
+
     request.creatingRequest()
 }
 
