@@ -1,3 +1,8 @@
+ul {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
 .search-form input {
   font-size: 3vh;
 }
@@ -9,7 +14,6 @@
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  grid-gap: 30px;
 }
 .photo-card {
   align-self: end;
@@ -18,6 +22,9 @@
 .gallery img {
   display: block;
   width: 100%;
+}
+.gallery img:hover {
+  cursor: pointer;
 }
 .stats {
   display: flex;
