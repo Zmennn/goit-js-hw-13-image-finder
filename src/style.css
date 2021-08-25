@@ -38,3 +38,18 @@ ul {
 .onOpen {
   overflow: hidden;
 }
+.button-up {
+  display: block;
+  width: 40px;
+  height: 40px;
+  /* border-radius: 50%; */
+  border: none;
+  outline: none;
+  position: fixed;
+  bottom: 3vh;
+  right: 3vw;
+  /* background-image: url("./img/up-arrow.svg");
+  background-repeat: no-repeat;
+  background-size: contain; */
+  fill: aquamarine;
+}

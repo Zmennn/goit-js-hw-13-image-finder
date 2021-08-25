@@ -7,6 +7,7 @@ import options from "./apiService";
 import { onErrorNotification } from './pnotify';
 import * as basicLightbox from 'basiclightbox'
 import "basiclightbox/dist/basicLightbox.min.css";
+import buttonTemplate from "./templates/button.hbs"
 
 let observer = {};
 let request = {};
@@ -17,7 +18,7 @@ let request = {};
 
 const bodyEl = document.querySelector('body');
 
-
+bodyEl.insertAdjacentHTML('beforeend', buttonTemplate());
 bodyEl.insertAdjacentHTML('beforeend', formTemplate());
 bodyEl.insertAdjacentHTML('beforeend', galleryTemplate());
 
