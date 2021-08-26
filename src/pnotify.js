@@ -6,8 +6,8 @@ import "@pnotify/core/dist/BrightTheme.css";
 const notificationSettings = new Stack({
     dir1: 'up',
     dir2: 'left',
-    firstpos1: 30,
-    firstpos2: 50,
+    firstpos1: 70,
+    firstpos2: 25,
     maxOpen: 1,
     modal: 'false',
     positioned: true,

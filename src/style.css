@@ -1,3 +1,18 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 ul {
   padding-left: 25px;
   padding-right: 25px;
@@ -38,18 +53,28 @@ ul {
 .onOpen {
   overflow: hidden;
 }
+
 .button-up {
   display: block;
+  padding: 0;
   width: 40px;
   height: 40px;
-  /* border-radius: 50%; */
   border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
   outline: none;
   position: fixed;
-  bottom: 3vh;
-  right: 3vw;
-  /* background-image: url("./img/up-arrow.svg");
-  background-repeat: no-repeat;
-  background-size: contain; */
-  fill: aquamarine;
+  bottom: 20px;
+  right: 25px;
+  fill: rgb(2, 92, 63);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1), fill, 300ms;
+}
+
+.button-up:hover,
+.button-up:focus {
+  fill: rgb(29, 37, 153);
+}
+
+.is-hidden {
+  display: none;
 }

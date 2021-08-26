@@ -7,25 +7,29 @@ import options from "./apiService";
 import { onErrorNotification } from './pnotify';
 import * as basicLightbox from 'basiclightbox'
 import "basiclightbox/dist/basicLightbox.min.css";
-import buttonTemplate from "./templates/button.hbs"
+import svg from "./img/symbol.svg";
+import debounce from 'lodash/debounce';
+
 
 let observer = {};
 let request = {};
 
-
-
-
-
 const bodyEl = document.querySelector('body');
 
-bodyEl.insertAdjacentHTML('beforeend', buttonTemplate());
+
 bodyEl.insertAdjacentHTML('beforeend', formTemplate());
 bodyEl.insertAdjacentHTML('beforeend', galleryTemplate());
+createButton()
 
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
+const btnEl = document.querySelector('.button-up');
 
 formEl.addEventListener('submit', onSubmit);
+window.addEventListener('scroll', debounce(onFormScroll, 200))
+btnEl.addEventListener('click', onBtnClick)
+
+
 
 function onSubmit(event) {
     event.preventDefault();
@@ -113,5 +117,25 @@ function onGalleryClick(event) {
         .catch(res => onErrorNotification("Картинка не полученна"))
 };
 
+function createButton() {
+    bodyEl.insertAdjacentHTML('beforeend',
+        `<button class="is-hidden button-up" type="button">
+      <svg width="40" height="40">
+        <use href="${svg}#icon-up-arrow"></use>
+      </svg>
+    </button>`
+    )
+};
 
+function onFormScroll(event) {
+    console.log(pageYOffset);
+    if (pageYOffset > 30) {
+        btnEl.classList.remove('is-hidden')
+    } else {
+        btnEl.classList.add('is-hidden')
+    }
+};
 
+function onBtnClick(event) {
+    formEl.scrollIntoView({ behavior: "smooth" });
+}
