@@ -128,7 +128,7 @@ function createButton() {
 };
 
 function onFormScroll(event) {
-    console.log(pageYOffset);
+
     if (pageYOffset > 30) {
         btnEl.classList.remove('is-hidden')
     } else {
