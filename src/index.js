@@ -46,13 +46,16 @@ function onSubmit(event) {
 
 export function processingRequest(promise) {
     promise.then(res => {
-        if (!res.ok) {
-            throw "Данные не полученны"
-        }
+
+        // if (!res.data.ok) {
+        //     throw "Данные не полученны"
+        // }
+        // этот блок стал лишним после рефактроринга  с fatch на axios, теперь все ошибки адекватно ловятся сами)
         return res
     })
-        .then(res => res.json())
+        .then(res => res.data)
         .then(res => {
+            console.log(res);
             if (res.total === 0) {
                 throw "Неадекватный ввод, исправьте"
             }
@@ -106,15 +109,17 @@ function onGalleryClick(event) {
 
     const id = (event.target.dataset.id);
     fetchById(id, options)
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(res => {
-            basicLightbox.create(`<img src=${res.hits[0].largeImageURL}>`,
+            console.log(res.data);
+            basicLightbox.create(`<img src=${res.data.hits[0].largeImageURL}>`,
                 {
                     onShow: () => bodyEl.classList.add('onOpen'),
                     onClose: () => bodyEl.classList.remove('onOpen')
                 }).show()
         })
         .catch(res => onErrorNotification("Картинка не полученна"))
+
 };
 
 function createButton() {

@@ -1,4 +1,5 @@
 import { processingRequest } from "./index"
+import axios from "axios";
 
 const BASE_URL = 'https://pixabay.com/api/'
 
@@ -19,7 +20,7 @@ export default class FetchImg {
         optionsArr.forEach(el => url.searchParams.set(el[0], el[1]));
         url.searchParams.set("page", this.pg);
         url.searchParams.set("q", this.searchRequest);
-        const fet = fetch(url.href);
+        const fet = axios.get(url.href);
         processingRequest(fet)
     }
 }
@@ -29,5 +30,5 @@ export function fetchById(id, { key }) {
 
     const url = `${BASE_URL}?key=${key}&id=${id}`;
 
-    return fetch(url)
+    return axios.get(url)
 }
