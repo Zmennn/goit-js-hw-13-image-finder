@@ -34,6 +34,10 @@ btnEl.addEventListener('click', onBtnClick)
 function onSubmit(event) {
     event.preventDefault();
 
+    if (formEl.elements.query.value === "") {
+        onErrorNotification("введите что-то");
+        return
+    }
     galleryEl.innerHTML = '';
 
     const searchRequest = formEl.elements.query.value;
@@ -45,17 +49,17 @@ function onSubmit(event) {
 
 
 export function processingRequest(promise) {
-    promise.then(res => {
+    // promise.then(res => {
 
-        // if (!res.data.ok) {
-        //     throw "Данные не полученны"
-        // }
-        // этот блок стал лишним после рефактроринга  с fatch на axios, теперь все ошибки адекватно ловятся сами)
-        return res
-    })
-        .then(res => res.data)
+    // if (!res.data.ok) {
+    //     throw "Данные не полученны"
+    // }
+    // этот блок стал лишним после рефактроринга  с fatch на axios, теперь все ошибки адекватно ловятся сами)
+    // return res
+    // })
+    promise.then(res => res.data)
         .then(res => {
-            console.log(res);
+
             if (res.total === 0) {
                 throw "Неадекватный ввод, исправьте"
             }
@@ -109,9 +113,9 @@ function onGalleryClick(event) {
 
     const id = (event.target.dataset.id);
     fetchById(id, options)
-        // .then(res => res.json())
+
         .then(res => {
-            console.log(res.data);
+
             basicLightbox.create(`<img src=${res.data.hits[0].largeImageURL}>`,
                 {
                     onShow: () => bodyEl.classList.add('onOpen'),
