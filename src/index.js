@@ -27,7 +27,8 @@ const btnEl = document.querySelector('.button-up');
 
 formEl.addEventListener('submit', onSubmit);
 window.addEventListener('scroll', debounce(onFormScroll, 200))
-btnEl.addEventListener('click', onBtnClick)
+btnEl.addEventListener('click', onBtnClick);
+window.addEventListener('scroll', () => console.log("object"));
 
 
 
